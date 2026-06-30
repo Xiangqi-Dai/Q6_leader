@@ -1,0 +1,9 @@
+pyproject.toml
+src/dora_camera_fps/__init__.py
+src/dora_camera_fps/main.py
+src/dora_camera_fps.egg-info/PKG-INFO
+src/dora_camera_fps.egg-info/SOURCES.txt
+src/dora_camera_fps.egg-info/dependency_links.txt
+src/dora_camera_fps.egg-info/entry_points.txt
+src/dora_camera_fps.egg-info/requires.txt
+src/dora_camera_fps.egg-info/top_level.txt

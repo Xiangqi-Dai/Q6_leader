@@ -1,0 +1,2 @@
+Opened camera at index /dev/v4l/by-id/usb-Orbbec_R__Orbbec_Gemini_335Lg_CPBDB53000FB-video-index0
+{"timestamp":"2026-06-18T07:03:05.218936Z","level":"INFO","fields":{"message":"","name":"MeterProvider.GlobalSet","message":"Global meter provider is set. Meters can now be created using global::meter() or global::meter_with_scope()."},"target":"opentelemetry"}

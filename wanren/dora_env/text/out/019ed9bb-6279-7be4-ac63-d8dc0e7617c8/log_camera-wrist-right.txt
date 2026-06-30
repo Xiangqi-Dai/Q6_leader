@@ -1,0 +1,2 @@
+Opened camera at index /dev/video11
+{"timestamp":"2026-06-18T07:56:40.486306Z","level":"INFO","fields":{"message":"","name":"MeterProvider.GlobalSet","message":"Global meter provider is set. Meters can now be created using global::meter() or global::meter_with_scope()."},"target":"opentelemetry"}

@@ -1,0 +1,1 @@
+/ros2_ws/openarm_ros2/openarm_bimanual_moveit_config/launch/move_group.launch.py

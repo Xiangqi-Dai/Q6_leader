@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/dora_openarm/__init__.py
+src/dora_openarm/main.py
+src/dora_openarm.egg-info/PKG-INFO
+src/dora_openarm.egg-info/SOURCES.txt
+src/dora_openarm.egg-info/dependency_links.txt
+src/dora_openarm.egg-info/entry_points.txt
+src/dora_openarm.egg-info/requires.txt
+src/dora_openarm.egg-info/top_level.txt

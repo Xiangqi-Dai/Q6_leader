@@ -1,0 +1,15 @@
+# dora cluster topology — 【单机】所有节点都在本机 192.168.0.56
+# (主臂 slot1 + 从臂 slot2 + 3 相机 全在本机)。
+# run_record_local.sh 用 coordinator+daemon 直接起, 不依赖本文件;
+# 本文件仅供 `dora cluster up` 备用。
+
+coordinator:
+  addr: 192.168.0.56        # 本机
+
+# Cross-daemon Zenoh rendezvous (单机其实用不到跨机, 留着备用).
+zenoh_peer: tcp/192.168.0.56:7447
+
+machines:
+  - id: leader
+    host: 192.168.0.56      # 本机(主臂+从臂+相机全在这)
+    user: root

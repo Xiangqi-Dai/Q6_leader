@@ -1,0 +1,46 @@
+<article class="panel panel-root" data-panel-kind="air_sniffer">
+  <header class="panel-header">
+    <h2>{{ title }}{% include "partials/_data_mode_badge.html" %}</h2>
+    {% if latest %}
+    <span class="panel-updated">采样 {{ latest.vita_data.get('sampled_at', latest.collected_at) | fmt_time }}</span>
+    {% else %}
+    <span class="panel-updated muted">等待数据…</span>
+    {% endif %}
+  </header>
+
+  {% if latest %}
+  {% set d = latest.vita_data %}
+  <div class="risk-banner {{ d.get('risk_level', 'normal') | risk_level_class }}">
+    <strong>{{ d.get('risk_level', 'normal') | upper }}</strong>
+    <span>{{ d.get('summary', '') or '—' }}</span>
+    {% if is_mock_mode %}{% include "partials/_data_mode_badge.html" %}{% endif %}
+    {% if d.get('error') %}<span class="err-tag">{{ d.get('error') }}</span>{% endif %}
+  </div>
+  <div class="metric-grid compact air-metric-grid">
+    <div class="metric"><span class="label">CO₂</span><span class="value">{{ d.get('co2', '—') }} ppm</span></div>
+    <div class="metric"><span class="label">甲醛</span><span class="value">{{ d.get('hcho', '—') }} µg/m³</span></div>
+    <div class="metric"><span class="label">VOC</span><span class="value">{{ d.get('voc', '—') }} µg/m³</span></div>
+    <div class="metric"><span class="label">PM2.5</span><span class="value">{{ d.get('pm25', '—') }} µg/m³</span></div>
+    <div class="metric"><span class="label">PM10</span><span class="value">{{ d.get('pm10', '—') }} µg/m³</span></div>
+    <div class="metric"><span class="label">温度</span><span class="value">{{ d.get('temperature') | fmt_float(1) }} ℃</span></div>
+    <div class="metric"><span class="label">湿度</span><span class="value">{{ d.get('humidity') | fmt_float(1) }} %</span></div>
+  </div>
+  {% else %}
+  <p class="empty">暂无空气传感器数据</p>
+  {% endif %}
+
+  <script type="application/json" data-chart-data="air-history">{{ {"pollutant": pollutant_points, "comfort": comfort_points} | tojson }}</script>
+
+  <div class="chart-block">
+    <div class="chart-block-title">污染物趋势</div>
+    <div class="chart-wrap chart-wrap--air">
+      <div class="chart-host" data-chart="air-pollutant"></div>
+    </div>
+  </div>
+  <div class="chart-block">
+    <div class="chart-block-title">温湿度趋势</div>
+    <div class="chart-wrap chart-wrap--air-sm">
+      <div class="chart-host" data-chart="air-comfort"></div>
+    </div>
+  </div>
+</article>

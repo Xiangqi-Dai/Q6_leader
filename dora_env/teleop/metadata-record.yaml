@@ -1,0 +1,25 @@
+# Copyright 2026 Enactic, Inc.
+#
+# 录制元数据:双臂 OpenArm(每臂 7 DoF + 夹爪 = 8 电机,共 16)+ 3 相机,无升降机构。
+# 由 recorder 读取并写入每个数据集的 metadata.yaml(会追加 version/episodes/frequencies)。
+
+location: Lab
+operator: Tester
+
+tasks:
+  - prompt: Bimanual teleoperation demonstration.
+    description: Operator drags the leader arms; the follower tracks 1:1 while data is recorded.
+
+equipment:
+  id: OpenArmBimanual
+  version: "1.0"
+  embodiments:
+    arms:
+      id: OpenArm
+      version: "2.0"
+      # 每臂 8 电机(7 关节 + 夹爪),左右共 16。无升降(lifter)。
+  perceptions:
+    cameras:
+      head: {}           # 头顶奥比中光 Gemini 335,MJPG 1280x720
+      wrist_left: {}     # 左腕 RealSense D435i,YUYV 1920x1080
+      wrist_right: {}    # 右腕 RealSense D435i,YUYV 1920x1080

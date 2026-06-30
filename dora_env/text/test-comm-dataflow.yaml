@@ -1,0 +1,22 @@
+# 跨机数据链路冒烟测试(纯软件,不碰硬件):
+#   gen@leader 每 tick 输出递增 counter → sink@follower 接收并打印/写文件。
+#   sink 能收到 = dora 节点间跨机数据链路通。
+nodes:
+  - id: gen
+    build: pip install -e /ros2_ws/dora_env/text/dora-comm-test
+    path: dora-counter
+    _unstable_deploy:
+      machine: leader
+    inputs:
+      tick: dora/timer/secs/1
+    outputs:
+      - counter
+
+  - id: sink
+    build: pip install -e /ros2_ws/dora_env/text/dora-comm-test
+    path: dora-print-counter
+    _unstable_deploy:
+      machine: follower
+    inputs:
+      counter: gen/counter
+    outputs: []

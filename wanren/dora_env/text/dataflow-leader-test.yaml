@@ -1,0 +1,50 @@
+# 主臂(leader)节点单机本地测试数据流。
+#
+# 目的:不接从臂、不启动 coordinator/daemon,只在主臂机本地用 `dora run`
+# 验证 leader 节点能否在 dora 框架下正常启动、维持零力矩并持续输出关节角。
+#
+# 频率(控制与采样解耦):
+#   control_tick 500Hz — 持续发零力矩帧维持使能(达妙需要持续帧)
+#   sample_tick 200Hz  — 读位 + 输出角度
+#
+# 数据流:
+#   dora/timer(500Hz) → leader-tick(quitter) → leader.control_tick(发零力矩)
+#   dora/timer(200Hz) ─────────────────────────→ leader.sample_tick(读位+输出)
+#                                                       ↓ position_left/right
+#                                                  monitor(终端打印角度)
+#
+# 运行(确保 CAN 口已 up):
+#   sudo ip link set can_slot1_ch0 up type can bitrate 1000000 dbitrate 5000000 fd on
+#   sudo ip link set can_slot1_ch1 up type can bitrate 1000000 dbitrate 5000000 fd on
+#   cd /ros2_ws/dora_env/text
+#   dora build dataflow-leader-test.yaml   # 安装节点依赖(quitter/leader/monitor)
+#   dora run dataflow-leader-test.yaml     # 本地跑,Ctrl-C 退出
+
+nodes:
+  - id: leader-tick
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-quitter
+    path: dora-openarm-quitter
+    inputs:
+      tick: dora/timer/millis/2   # 500 Hz control tick
+    outputs:
+      - tick
+
+  - id: leader
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-leader
+    path: dora-openarm-leader
+    # 如本机 CAN 口名不同,取消注释并修改:
+    # args: "--left-can-interface can_slot1_ch0 --right-can-interface can_slot1_ch1"
+    inputs:
+      control_tick: leader-tick/tick     # 500 Hz: hold zero torque
+      sample_tick: dora/timer/millis/5   # 200 Hz: read + stream positions
+    outputs:
+      - position_left
+      - position_right
+
+  - id: monitor
+    build: pip install -e ./dora-print-positions
+    path: dora-print-positions
+    inputs:
+      position_left: leader/position_left
+      position_right: leader/position_right
+    outputs: []

@@ -1,0 +1,8 @@
+Opened camera at index /dev/video11
+Traceback (most recent call last):
+  File "/usr/local/bin/opencv-video-capture", line 6, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.10/dist-packages/opencv_video_capture/main.py", line 313, in main
+    raise RuntimeError(
+RuntimeError: Error: cannot read frame from camera at path /dev/video11. For resiliency you can use: restart_policy: on-failure in the node definition.
+ioctl(VIDIOC_QBUF): Bad file descriptor

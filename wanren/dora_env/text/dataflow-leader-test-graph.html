@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="mermaid">
+        flowchart TB
+  leader["**leader**"]
+  leader-tick["**leader-tick**"]
+  monitor[/"**monitor**"\]
+subgraph ___dora___ [dora]
+  subgraph ___timer_timer___ [timer]
+    dora/timer/millis/10[\millis/10/]
+  end
+end
+  leader-tick -- tick --> leader
+  dora/timer/millis/10 -- tick --> leader-tick
+  leader -- position_left --> monitor
+  leader -- position_right --> monitor
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base' });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+[0.015s] Invoking command in '/ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config': AMENT_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:/opt/ros/humble /usr/bin/cmake /ros2_ws/openarm_ros2/openarm_bimanual_moveit_config -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config
+[0.131s] -- The C compiler identification is GNU 11.4.0
+[0.280s] -- The CXX compiler identification is GNU 11.4.0
+[0.296s] -- Detecting C compiler ABI info
+[0.507s] -- Detecting C compiler ABI info - done
+[0.520s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.521s] -- Detecting C compile features
+[0.521s] -- Detecting C compile features - done
+[0.527s] -- Detecting CXX compiler ABI info
+[0.702s] -- Detecting CXX compiler ABI info - done
+[0.713s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.713s] -- Detecting CXX compile features
+[0.714s] -- Detecting CXX compile features - done
+[0.719s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.030s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.197s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.406s] -- Configuring done
+[1.411s] -- Generating done
+[1.413s] -- Build files have been written to: /ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config
+[1.424s] Invoked command in '/ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config' returned '0': AMENT_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:/opt/ros/humble /usr/bin/cmake /ros2_ws/openarm_ros2/openarm_bimanual_moveit_config -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config
+[1.428s] Invoking command in '/ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config': AMENT_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:/opt/ros/humble /usr/bin/cmake --build /ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config -- -j8 -l8
+[1.541s] Invoked command in '/ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config' returned '0': AMENT_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:/opt/ros/humble /usr/bin/cmake --build /ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config -- -j8 -l8
+[1.547s] Invoking command in '/ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config': AMENT_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:/opt/ros/humble /usr/bin/cmake --install /ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config
+[1.578s] -- Install configuration: ""
+[1.578s] -- Execute custom install script
+[1.579s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/ament_index/resource_index/package_run_dependencies/openarm_bimanual_moveit_config
+[1.611s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/ament_index/resource_index/parent_prefix_path/openarm_bimanual_moveit_config
+[1.643s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/environment/ament_prefix_path.sh
+[1.667s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/environment/ament_prefix_path.dsv
+[1.698s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/environment/path.sh
+[1.730s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/environment/path.dsv
+[1.763s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/local_setup.bash
+[1.782s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/local_setup.sh
+[1.802s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/local_setup.zsh
+[1.822s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/local_setup.dsv
+[1.858s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/package.dsv
+[1.892s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/ament_index/resource_index/packages/openarm_bimanual_moveit_config
+[1.924s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/cmake/openarm_bimanual_moveit_configConfig.cmake
+[1.950s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/cmake/openarm_bimanual_moveit_configConfig-version.cmake
+[1.969s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/package.xml
+[2.005s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/launch/demo.launch.py
+[2.027s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/launch/move_group.launch.py
+[2.089s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/launch/moveit_rviz.launch.py
+[2.122s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/launch/setup_assistant.launch.py
+[2.152s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/launch/spawn_controllers.launch.py
+[2.183s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/launch/static_virtual_joint_tfs.launch.py
+[2.218s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/joint_limits.yaml
+[2.247s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/kinematics.yaml
+[2.279s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/moveit.rviz
+[2.311s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/moveit_controllers.yaml
+[2.343s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/openarm_bimanual.srdf
+[2.374s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/openarm_bimanual.urdf.xacro
+[2.397s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/pilz_cartesian_limits.yaml
+[2.420s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/ros2_controllers.yaml
+[2.455s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v1.0/sensors_3d.yaml
+[2.488s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/joint_limits.yaml
+[2.521s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/kinematics.yaml
+[2.554s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/moveit.rviz
+[2.587s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/moveit_controllers.yaml
+[2.605s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/openarm_bimanual.srdf
+[2.640s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/openarm_bimanual.urdf.xacro
+[2.673s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/pilz_cartesian_limits.yaml
+[2.706s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/ros2_controllers.yaml
+[2.740s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/config/openarm_v2.0/sensors_3d.yaml
+[2.768s] -- Symlinking: /ros2_ws/openarm_ros2/install/openarm_bimanual_moveit_config/share/openarm_bimanual_moveit_config/.setup_assistant
+[2.808s] Invoked command in '/ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config' returned '0': AMENT_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/ros2_ws/openarm_ros2/install/openarm_description:/opt/ros/humble /usr/bin/cmake --install /ros2_ws/openarm_ros2/build/openarm_bimanual_moveit_config

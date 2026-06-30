@@ -1,0 +1,2 @@
+[console_scripts]
+dora-openarm-follower = dora_openarm_follower.main:main

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/usr/local/bin/dora-openarm-dataset-recorder", line 6, in <module>
+    sys.exit(main())
+  File "/ros2_ws/dora_env/dora-openarm-data-collection/nodes/dora-openarm-dataset-recorder/src/dora_openarm_dataset_recorder/main.py", line 322, in main
+    dataset_writer = DatasetWriter(args.directory, args.name, metadata)
+  File "/ros2_ws/dora_env/dora-openarm-data-collection/nodes/dora-openarm-dataset-recorder/src/dora_openarm_dataset_recorder/main.py", line 178, in __init__
+    self._load_existing_episodes()
+AttributeError: 'DatasetWriter' object has no attribute '_load_existing_episodes'
+{"timestamp":"2026-06-18T07:58:07.457868Z","level":"WARN","fields":{"message":"timeout while waiting for event stream thread"},"target":"dora_node_api::event_stream::thread"}
+{"timestamp":"2026-06-18T07:58:07.459168Z","level":"WARN","fields":{"message":"timeout: node finished, but token DropToken(019ed9bc-c078-75e0-b4f0-f2094d5c63b0) was still not dropped after 1s -> ignoring it"},"target":"dora_node_api::event_stream::thread"}

@@ -1,0 +1,61 @@
+# Copyright 2026 Enactic, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Bimanual leader-follower teleoperation dataflow (distributed).
+#
+#   leader   (main arm host)  -> zero-torque + reads joint angles
+#   follower (follower host)  -> MIT PD tracks the leader's joint angles
+#
+# Both nodes manage the LEFT and RIGHT arm (one CAN interface each) inside a
+# single process. Cross-machine transport is handled by dora over Zenoh.
+
+nodes:
+  - id: leader-tick
+    # Existing quitter node: emits a periodic control tick and stops the whole
+    # dataflow when it receives a "quit" command. Ctrl-C also stops it.
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-quitter
+    path: dora-openarm-quitter
+    inputs:
+      tick: dora/timer/millis/2   # 500 Hz control tick
+    outputs:
+      - tick
+
+  - id: leader
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-leader
+    path: dora-openarm-leader
+    # Override the per-arm CAN interfaces if they differ on this host:
+    # args: "--left-can-interface can_slot1_ch0 --right-can-interface can_slot1_ch1"
+    _unstable_deploy:
+      machine: leader
+    inputs:
+      control_tick: leader-tick/tick          # 500 Hz: hold zero torque
+      sample_tick: dora/timer/millis/5        # 200 Hz: read + stream positions
+    outputs:
+      - position_left
+      - position_right
+
+  - id: follower
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-follower
+    path: dora-openarm-follower
+    # Override the per-arm CAN interfaces if they differ on the follower host:
+    # args: "--left-can-interface can_slot1_ch0 --right-can-interface can_slot1_ch1"
+    _unstable_deploy:
+      machine: follower
+      # NOTE: dora 0.5.0 has no `distribute` field. Each host must already have
+      # this node package pip-installed (see teleop/README.md "Setup" step 2).
+    inputs:
+      control_tick: dora/timer/millis/2        # 500 Hz local PD loop
+      target_left: leader/position_left        # ~200 Hz target updates
+      target_right: leader/position_right
+    outputs: []

@@ -1,0 +1,92 @@
+# 录制冒烟测试(不碰电机,单机从臂 dora run):
+#   dummy leader/follower(假动作数据)+ dummy-command(自动 start/success)+ 真实 3 相机 + recorder。
+#   验证 recorder 真能写出 {DIRECTORY}/{NAME}/episodes/0/{action,obs,cameras}。
+nodes:
+  - id: dummy-leader
+    path: python3
+    args: "-u /ros2_ws/dora_env/text/dora-record-dummy/leader.py"
+    inputs:
+      tick: dora/timer/millis/100
+    outputs:
+      - position_left
+      - position_right
+
+  - id: dummy-follower
+    path: python3
+    args: "-u /ros2_ws/dora_env/text/dora-record-dummy/follower.py"
+    inputs:
+      tick: dora/timer/millis/100
+    outputs:
+      - state_left
+      - state_right
+
+  - id: dummy-command
+    path: python3
+    args: "-u /ros2_ws/dora_env/text/dora-record-dummy/command.py"
+    inputs:
+      tick: dora/timer/secs/1
+    outputs:
+      - command
+
+  - id: camera-head
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Orbbec_R__Orbbec_Gemini_335Lg_CPBDB53000FB-video-index0"
+      CAPTURE_FOURCC: "MJPG"
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - image
+
+  - id: camera-wrist-left
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Intel_R__RealSense_TM__Depth_Camera_435i_Intel_R__RealSense_TM__Depth_Camera_435i_261443064325-video-index0"
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 1920
+      IMAGE_HEIGHT: 1080
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - image
+
+  - id: camera-wrist-right
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    restart_policy: on-failure
+    env:
+      CAPTURE_PATH: "/dev/video11"
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 1920
+      IMAGE_HEIGHT: 1080
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - image
+
+  - id: recorder
+    build: pip install -e /ros2_ws/dora_env/dora-openarm-data-collection/nodes/dora-openarm-dataset-recorder
+    path: dora-openarm-dataset-recorder
+    env:
+      DIRECTORY: "/ros2_ws/dora_env/dataset/test"
+      NAME: "smoke_test"
+      METADATA_FILE: "/ros2_ws/dora_env/teleop/metadata-record.yaml"
+      OPERATION_TYPE: "teleop"
+    inputs:
+      command: dummy-command/command
+      arm_left_action: dummy-leader/position_left
+      arm_right_action: dummy-leader/position_right
+      arm_left_observation: dummy-follower/state_left
+      arm_right_observation: dummy-follower/state_right
+      camera_head: camera-head/image
+      camera_wrist_left: camera-wrist-left/image
+      camera_wrist_right: camera-wrist-right/image
+    outputs: []

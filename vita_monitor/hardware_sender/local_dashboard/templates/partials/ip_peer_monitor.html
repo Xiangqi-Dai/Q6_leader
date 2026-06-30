@@ -1,0 +1,90 @@
+<article class="panel panel-root panel-ip-peer" data-panel-kind="ip_peer_monitor">
+  <header class="panel-header">
+    <h2>{{ title }}{% include "partials/_data_mode_badge.html" %}</h2>
+    {% if latest %}
+    <span class="panel-updated">更新 {{ latest.collected_at | fmt_time }}</span>
+    {% else %}
+    <span class="panel-updated muted">等待数据…</span>
+    {% endif %}
+  </header>
+
+  {% if latest %}
+  {% set d = latest.vita_data %}
+  <div class="ip-peer-summary">
+    <div class="metric {{ d.get('online_count', 0) | ip_peer_summary(d.get('peer_count', 0)) }}">
+      <span class="label">在线</span>
+      <span class="value">{{ d.get('online_count', 0) }} / {{ d.get('peer_count', 0) }}</span>
+    </div>
+    <div class="metric neutral">
+      <span class="label">探测时间</span>
+      <span class="value">{{ d.get('probed_at') | fmt_time }}</span>
+    </div>
+    {% if d.get('error') %}
+    <div class="metric bad span-2">
+      <span class="label">告警</span>
+      <span class="value small">{{ d.get('error') }}</span>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if peers %}
+  <div class="table-wrap ip-peer-table-wrap">
+    <table class="ip-peer-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>IP</th>
+          <th>状态</th>
+          <th>延迟</th>
+          <th>丢包</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for peer in peers %}
+        <tr>
+          <td>{{ peer.get('name', '—') }}</td>
+          <td class="mono">{{ peer.get('ip', '—') }}</td>
+          <td class="{{ peer.get('connected') | ip_peer_traffic('connected') }}">
+            {{ '在线' if peer.get('connected') else '离线' }}
+          </td>
+          <td class="{{ peer.get('latency_ms') | ip_peer_traffic('latency_ms') }}">
+            {% if peer.get('connected') %}{{ peer.get('latency_ms', '—') }} ms{% else %}—{% endif %}
+          </td>
+          <td class="{{ peer.get('packet_loss_rate') | ip_peer_traffic('packet_loss_rate') }}">
+            {{ peer.get('packet_loss_rate') | fmt_percent_rate }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">暂无对端配置或探测结果。</p>
+  {% endif %}
+  {% else %}
+  <p class="empty">等待 ip_peer_monitor 数据…</p>
+  {% endif %}
+
+  {% if history|length > 1 %}
+  <details class="history">
+    <summary>近期在线数（{{ history|length }} 条）</summary>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>时间</th><th>在线</th><th>总数</th></tr>
+        </thead>
+        <tbody>
+          {% for row in history|reverse %}
+          {% set hd = row.vita_data %}
+          <tr>
+            <td>{{ row.collected_at | fmt_time }}</td>
+            <td>{{ hd.get('online_count', '—') }}</td>
+            <td>{{ hd.get('peer_count', '—') }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </details>
+  {% endif %}
+</article>

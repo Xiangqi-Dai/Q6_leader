@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dora-comm-test"
+version = "0.1.0"
+description = "Minimal cross-machine comm test nodes (counter generator + printer sink)"
+requires-python = ">=3.10"
+dependencies = ["dora-rs>=0.5.0", "pyarrow"]
+
+[project.scripts]
+dora-counter = "dora_comm_test.counter:main"
+dora-print-counter = "dora_comm_test.printer:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

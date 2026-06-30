@@ -1,0 +1,56 @@
+# 纯相机 30fps 实测(不碰电机,单机在从臂 dora run):
+#   3 个相机(配置同 dataflow-record)+ fps-counter 统计每秒帧率。
+# 用法(从臂): dora run test-camera-dataflow.yaml
+nodes:
+  - id: camera-head
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Orbbec_R__Orbbec_Gemini_335Lg_CPBDB53000FB-video-index0"
+      CAPTURE_FOURCC: "MJPG"
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - image
+
+  - id: camera-wrist-left
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Intel_R__RealSense_TM__Depth_Camera_435i_Intel_R__RealSense_TM__Depth_Camera_435i_261443064325-video-index0"
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - image
+
+  - id: camera-wrist-right
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Intel_R__RealSense_TM__Depth_Camera_435i_Intel_R__RealSense_TM__Depth_Camera_435i_261143064023-video-index0"
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33
+    outputs:
+      - image
+
+  - id: fps-counter
+    path: python3
+    args: "-u /ros2_ws/dora_env/text/dora-camera-fps/src/dora_camera_fps/main.py"
+    inputs:
+      tick: dora/timer/secs/1
+      camera_head: camera-head/image
+      camera_wrist_left: camera-wrist-left/image
+      camera_wrist_right: camera-wrist-right/image
+    outputs: []

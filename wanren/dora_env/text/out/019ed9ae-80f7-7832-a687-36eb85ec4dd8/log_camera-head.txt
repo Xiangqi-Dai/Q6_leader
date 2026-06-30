@@ -1,0 +1,1 @@
+Opened camera at index /dev/v4l/by-id/usb-Orbbec_R__Orbbec_Gemini_335Lg_CPBDB53000FB-video-index0

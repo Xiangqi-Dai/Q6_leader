@@ -1,0 +1,2 @@
+[console_scripts]
+dora-openarm-local-policy-server = dora_openarm_local_policy_server.main:main

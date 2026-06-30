@@ -1,0 +1,60 @@
+device:
+  id: Q6_robot      # 实际部署时，替换为机器人名称
+  sudo_password: "radxa"     # 机器的 sudo 密码，用于 iw 等需要 root 权限的命令；留空则不使用 sudo
+# Q6 是 OpenArm 机器人
+
+mqtt:
+  host: 101.126.68.169 # 后续修改为 实际使用的 公网ip
+  port: 5004           # 根据broker配置修改
+  use_tls: false
+  username: Q6_robot  # 实际部署时，替换为机器人名称 
+  password: Q6_robot_wanrenai888!  # 实际部署时，在 EMQX(broker)的管理平台进行用户创建
+  keepalive: 60
+  client_id: Q6_robot # 实际部署时，替换为机器人名称
+
+sender:
+  info_pool_maxsize: 1000
+  publish_idle_sleep_sec: 0.2
+  plugins:
+    heartbeat:
+      enabled: true
+      class: plugins.heartbeat.plugin:HeartbeatVitalPlugin
+      interval_sec: 1.0
+      qos: 0
+      kwargs: {}
+    # 需在已 source 的 ROS 2 环境运行（见 docs/plugins/2. local_map.md）
+    local_map:
+      enabled: false
+      class: plugins.local_map.plugin:LocalMapVitalPlugin
+      interval_sec: 1.0
+      qos: 0
+      kwargs:
+        map_topic: "/glio_map"
+        map_field_path: ":"
+        map_message_type: "sensor_msgs/msg/PointCloud2"
+    local_pose:
+      enabled: false
+      class: plugins.local_pose.plugin:LocalPoseVitalPlugin
+      interval_sec: 0.5
+      qos: 0
+      kwargs:
+        pose_topic: "/get_pose"
+        pose_field_path: ":head_pose:"
+        pose_message_type: "geometry_msgs/msg/PoseStamped"
+    # AIR-MOD-001 七合一空气传感器；需能访问 sensor_url（见 docs/plugins/4. air_sniffer.md）
+    air_sniffer:
+      enabled: true
+      class: plugins.air_sniffer.plugin:AirSnifferVitalPlugin
+      interval_sec: 3.0
+      qos: 0
+      kwargs:
+        sensor_url: "http://192.168.8.89/api/sensor"
+        timeout_sec: 3.0
+    radio_sniffer:
+      enabled: true
+      class: plugins.radio_sniffer.plugin:RadioSnifferVitalPlugin
+      interval_sec: 15.0
+      qos: 0
+      kwargs:
+        interface: ""
+        scan_method: auto

@@ -1,0 +1,191 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ros2_ws/openarm_ros2/build/openarm_description
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/__init__.py
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/config/inertials.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/config/joint_limits.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/config/kinematics.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/config/kinematics_link.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/meshes/collision/finger.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/meshes/collision/hand.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/meshes/visual/finger.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/meshes/visual/finger.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/meshes/visual/hand.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/parallel_link/urdf/parallel_link_standalone.urdf.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/inertials/nominal.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/joint/joint_axes.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/joint/joint_limits.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/joint/joint_mimics.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/joint/joint_origins.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/link/collisions.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/link/visuals.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/old/inertials.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/old/joint_limits.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/old/kinematics.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/old/kinematics_link.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/struct/name_mapping.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/struct/reference_points.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/config/struct/topology.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/ee_base_link.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/finger_inner.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/finger_outer.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_inner/finger_inner_00.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_inner/finger_inner_01.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_inner/finger_inner_02.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_inner/finger_inner_03.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_outer/finger_outer_00.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_outer/finger_outer_01.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_outer/finger_outer_02.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_outer/finger_outer_03.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_outter/finger_outter_00.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_outter/finger_outter_01.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/collision/splited/finger_outter/finger_outter_02.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/visual/ee_base_link.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/visual/finger_inner.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/meshes/visual/finger_outer.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/end_effector/pinch_gripper/urdf/pinch_gripper_standalone.urdf.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/arm/control_gains.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/arm/inertials.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/arm/joint_limits.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/arm/kinematics.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/arm/kinematics_link.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/arm/kinematics_offset.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/body/inertials.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/body/kinematics.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/config/body/kinematics_link.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link0_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link1_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link2_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link3_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link4_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link5_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link6_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/collision/link7_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link0.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link0.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link1.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link1.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link2.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link2.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link3.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link3.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link4.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link4.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link5.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link5.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link6.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link6.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link7.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/arm/visual/link7.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/body/collision/body_link0_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/body/visual/body_link0.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/mesh/body/visual/body_link0.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/arm/openarm_arm.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/arm/openarm_macro.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/body/openarm_body.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/body/openarm_body_macro.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/ee/ee_dispatcher.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/ee/openarm_ee_macro.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/ee/parallel_link/openarm_parallel_gripper.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/ee/pinch_gripper/openarm_v20_pinch_gripper.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/example/v1.urdf
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/openarm_v10.urdf.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/robot/openarm_robot.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/ros2_control/openarm.bimanual.ros2_control.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v1.0/urdf/ros2_control/openarm.ros2_control.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/control/control_gains.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/control/friction.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/inertials/nominal.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/joint/joint_axes.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/joint/joint_limits.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/joint/joint_origins.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/link/collisions.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/link/visuals.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/meta.md
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/struct/name_mapping.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/struct/reference_points.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/arm/struct/topology.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/body/inertials/nominal.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/body/link/collisions.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/body/link/visuals.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/body/meta.md
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/body/struct/reference_points.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/body/struct/topology.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/meta.md
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/robot_presets/default_bimanual.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/robot_presets/left_arm.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/robot_presets/left_arm_with_pinch_gripper.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/robot_presets/right_arm.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/config/robot_presets/right_arm_with_pinch_gripper.yaml
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/base_link.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/link1.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/link2.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/link3.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/link4.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/link5.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/link6.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/splited/link5/link5_00.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/splited/link5/link5_01.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/collision/splited/link5/link5_02.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/meta.md
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/visual/base_link.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/visual/link1.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/visual/link2.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/visual/link3.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/visual/link4.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/visual/link5.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/arm/visual/link6.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/body/collision/body_link0_symp.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/body/meta.md
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/body/visual/body_link0.dae
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/meshes/body/visual/body_link0.stl
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/example/v2.urdf
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/openarm_v20.urdf.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/ros2_control/openarm.bimanual.ros2_control.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/ros2_control/openarm.ros2_control.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/utils/openarm_v20_arm.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/utils/openarm_v20_ee.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/utils/openarm_v20_robot.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/utils/openarm_v20_sensor.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/robot/openarm_v2.0/urdf/utils/openarm_v20_utils.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/assets/sensor/zed/urdf_wrapper/openarm_zed_wrapper.xacro
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/launch/display_openarm.launch.py
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/rviz/arm_only.rviz
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/rviz/bimanual.rviz
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/ament_index/resource_index/package_run_dependencies/openarm_description
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/ament_index/resource_index/parent_prefix_path/openarm_description
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/environment/ament_prefix_path.sh
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/environment/ament_prefix_path.dsv
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/environment/path.sh
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/environment/path.dsv
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/local_setup.bash
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/local_setup.sh
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/local_setup.zsh
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/local_setup.dsv
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/package.dsv
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/ament_index/resource_index/packages/openarm_description
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/cmake/openarm_descriptionConfig.cmake
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/cmake/openarm_descriptionConfig-version.cmake
+-- Symlinking: /ros2_ws/openarm_ros2/install/openarm_description/share/openarm_description/package.xml

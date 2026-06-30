@@ -1,0 +1,63 @@
+<article class="panel panel-root panel-radio" data-panel-kind="radio_sniffer">
+  <header class="panel-header">
+    <h2>{{ title }}{% include "partials/_data_mode_badge.html" %}</h2>
+    {% if display %}
+    <span class="panel-updated">
+      {% if using_stale %}上次成功 · {% endif %}
+      {{ display.vita_data.get('interface', '—') }} · {{ display.vita_data.get('network_count', 0) }} AP
+    </span>
+    {% elif latest %}
+    <span class="panel-updated muted">采集失败</span>
+    {% else %}
+    <span class="panel-updated muted">等待数据…</span>
+    {% endif %}
+  </header>
+
+  {% if latest_failed %}
+  <p class="radio-warn-inline">⚠ 本次采集失败：{{ latest.vita_data.get('error') or '扫描失败' }}</p>
+  {% elif display and not latest_failed %}
+  {% set d = display.vita_data %}
+  {% if d.get('status') == 'empty' %}
+  <p class="radio-warn-inline">⚠ 本次扫描未发现 WiFi AP</p>
+  {% endif %}
+  {% endif %}
+
+  {% if using_stale %}
+  <p class="radio-stale-note muted small">当前展示为最近一次成功扫描结果</p>
+  {% endif %}
+
+  {% if display %}
+  {% set d = display.vita_data %}
+  <div class="radio-dual">
+    <div class="radio-signal-section">
+      <div class="chart-block-title">WiFi 信号强度</div>
+      {% if sorted_networks %}
+      <div class="signal-list-scroll">
+        {% for net in sorted_networks %}
+        {% set pct = (net.get('signal_percent', 0) | float) | round(0, 'common') | int %}
+        <div class="signal-row">
+          <span class="signal-row-name" title="{{ net.get('ssid') or 'Hidden' }}">{{ net.get('ssid') or 'Hidden' }}</span>
+          <div class="signal-row-track">
+            <div class="signal-row-bar" data-pct="{{ pct }}"></div>
+          </div>
+          <span class="signal-row-pct">{{ pct }}%</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="empty">暂无 WiFi 信号数据</p>
+      {% endif %}
+    </div>
+
+    <div class="radio-band-section">
+      <div class="chart-block-title">频段通道占用</div>
+      <script type="application/json" data-chart-data="radio-sniffer">{{ radio_data | tojson }}</script>
+      <div class="chart-wrap chart-wrap--radio-band">
+        <div class="chart-host" data-chart="radio-band"></div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p class="empty">暂无 WiFi 嗅探数据</p>
+  {% endif %}
+</article>

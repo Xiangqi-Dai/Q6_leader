@@ -1,0 +1,23 @@
+python3 enable_openarm.py enable #主动臂使能
+python3 right_arm.py zero #主动右臂归零
+python3 right_arm.py home #主动右臂使能归零失能
+python3 left_arm.py zero #主动左臂归零
+python3 left_arm.py home #主动左臂使能归零失能
+python3 enable_openarm.py disable #主动臂失能
+
+python3 left_arm_slot2.py  zero #从动左臂归零
+python3 right_arm_slot2.py zero #从动右臂归零
+
+python3 /ros2_ws/can_infra/enable_openarm.py enable  --can can_slot2_ch0 can_slot2_ch1 #从动臂使能
+python3 /ros2_ws/can_infra/enable_openarm.py disable --can can_slot2_ch0 can_slot2_ch1 #从动臂失能
+
+#python3 right_arm.py setzero #标零
+cd /ros2_ws_dxq/wanren/dora_env/teleop
+./run_record_local.sh #数采
+
+python3 /ros2_ws/wanren/dora_env/text/test_leader_gravity_comp.py --gain 0.3 #重力补偿
+
+#将原始数据集转换成lerobotv3.0的格式
+cd /ros2_ws/openarm_dataset
+PYTHONPATH=src .venv-lr30/bin/python -m openarm_dataset.convert \
+  /ros2_ws/wanren/dora_env/datasets/data01 /ros2_ws/wanren/dora_env/datasets/data01_lerobotv3.0 --format lerobot_v3.0 --fps 30

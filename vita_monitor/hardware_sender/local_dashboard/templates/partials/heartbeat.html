@@ -1,0 +1,43 @@
+<article class="panel panel-root" data-panel-kind="heartbeat">
+  <header class="panel-header">
+    <h2>{{ title }}{% include "partials/_data_mode_badge.html" %}</h2>
+    {% if latest %}
+    <span class="panel-updated">更新 {{ latest.collected_at | fmt_time }}</span>
+    {% else %}
+    <span class="panel-updated muted">等待数据…</span>
+    {% endif %}
+  </header>
+
+  {% if latest %}
+  {% set d = latest.vita_data %}
+  <div class="metric-grid compact">
+    <div class="metric {{ d.get('network_type') | heartbeat_traffic('network_type') }}">
+      <span class="label">网络</span>
+      <span class="value">{{ d.get('network_type', '—') }}</span>
+    </div>
+    <div class="metric {{ d.get('latency_ms') | heartbeat_traffic('latency_ms') }}">
+      <span class="label">延迟</span>
+      <span class="value">{{ d.get('latency_ms', '—') }} ms</span>
+    </div>
+    <div class="metric {{ d.get('rssi_dbm') | heartbeat_traffic('rssi_dbm') }}">
+      <span class="label">信号</span>
+      <span class="value">{{ d.get('rssi_dbm', '—') }} dBm</span>
+    </div>
+    <div class="metric {{ d.get('packet_loss_rate') | heartbeat_traffic('packet_loss_rate') }}">
+      <span class="label">丢包</span>
+      <span class="value">{{ d.get('packet_loss_rate') | fmt_percent_rate }}</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="chart-block">
+    <div class="chart-block-title">近期心跳 <span class="chart-block-sub">延迟 / 信号 / 丢包 / 抖动</span></div>
+    <script type="application/json" data-chart-data="heartbeat-line">{{ {"points": heartbeat_points} | tojson }}</script>
+    <div class="chart-wrap chart-wrap--hb">
+      <div class="chart-host" data-chart="heartbeat-line"></div>
+      {% if not heartbeat_points %}
+      <div class="chart-empty">暂无历史数据，等待采集…</div>
+      {% endif %}
+    </div>
+  </div>
+</article>

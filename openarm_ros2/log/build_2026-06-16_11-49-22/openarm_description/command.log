@@ -1,0 +1,6 @@
+Invoking command in '/ros2_ws/openarm_ros2/build/openarm_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /ros2_ws/openarm_ros2/openarm_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/ros2_ws/openarm_ros2/install/openarm_description
+Invoked command in '/ros2_ws/openarm_ros2/build/openarm_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /ros2_ws/openarm_ros2/openarm_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/ros2_ws/openarm_ros2/install/openarm_description
+Invoking command in '/ros2_ws/openarm_ros2/build/openarm_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /ros2_ws/openarm_ros2/build/openarm_description -- -j8 -l8
+Invoked command in '/ros2_ws/openarm_ros2/build/openarm_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /ros2_ws/openarm_ros2/build/openarm_description -- -j8 -l8
+Invoking command in '/ros2_ws/openarm_ros2/build/openarm_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /ros2_ws/openarm_ros2/build/openarm_description
+Invoked command in '/ros2_ws/openarm_ros2/build/openarm_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /ros2_ws/openarm_ros2/build/openarm_description

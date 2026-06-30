@@ -1,0 +1,140 @@
+data/clickhouse/**
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing / coverage / type check
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+hypothesis/
+
+# --- Environment & secrets ---
+.env
+.env.*
+!.env.example
+*.pem
+secrets/
+
+# --- Node / 包管理器（通用）---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+*.local
+
+# --- Frontend: Vue / React 通用（Vite、TS、工具链）---
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+.prettiercache
+.parcel-cache/
+.turbo/
+coverage/
+storybook-static/
+*.local.html
+
+# Vite（Vue 3 / React + Vite 常用）
+.vite/
+**/.vite/
+
+# --- Vue 生态 ---
+# 单页 / Vite 构建产物：仓库内任意 dist/ 目录（与上方 Python 的 dist/ 规则一致，含前端）
+# Nuxt
+.nuxt/
+.output/
+# VuePress / VitePress
+.vuepress/dist
+.vitepress/cache
+.vitepress/dist
+# Quasar
+.quasar/
+# Capacitor / Ionic（若后续用到）
+# android/ ios/ 一般由模板生成，按需取消注释
+# capacitor-sync 临时文件
+.capacitor/
+
+# --- React 生态 ---
+# Create React App（构建目录 build/ 与 Python build/ 同名，已全局忽略）
+# Next.js
+.next/
+out/
+# Remix
+.remix/
+# TanStack Start / Router 等可能生成的缓存
+.tanstack/
+
+# --- 部署与托管 ---
+.vercel/
+.netlify/
+.wrangler/
+.serverless/
+
+# --- E2E / 组件测试（按需）---
+cypress/videos/
+cypress/screenshots/
+playwright-report/
+test-results/
+blob-report/
+
+# --- 本仓库 frontend_dashboard 路径（与上文通用规则互补）---
+frontend_dashboard/dist/
+frontend_dashboard/.output/
+frontend_dashboard/.nuxt/
+frontend_dashboard/.next/
+frontend_dashboard/out/
+frontend_dashboard/build/
+
+# --- IDE & editors ---
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Logs & temp ---
+*.log
+logs/
+tmp/
+temp/
+.cache/
+data/

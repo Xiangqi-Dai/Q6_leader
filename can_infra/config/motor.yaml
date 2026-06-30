@@ -1,0 +1,74 @@
+# Damiao电机 CAN通信 配置文件
+# config_manager.py 读取此配置，生成 motor_config.txt 并初始化CAN口
+
+interfaces:
+  can_slot1_ch0:
+    type: can-fd
+    bitrate: 1000000
+    data_bitrate: 5000000
+    motors:
+      - id: 0x001
+        type: DM8009
+        master_id: 0x11
+      - id: 0x002
+        type: DM8009
+        master_id: 0x12
+      - id: 0x003
+        type: DM4340P_48V
+        master_id: 0x13
+      - id: 0x004
+        type: DM4340_48V
+        master_id: 0x14
+      - id: 0x005
+        type: DM4310_48V
+        master_id: 0x15
+      - id: 0x006
+        type: DM4310_48V
+        master_id: 0x16
+      - id: 0x007
+        type: DM4310_48V
+        master_id: 0x17
+      - id: 0x008
+        type: DM4310_48V
+        master_id: 0x18
+
+  can_slot1_ch1:
+    type: can-fd
+    bitrate: 1000000
+    data_bitrate: 5000000
+    motors:
+      - id: 0x001
+        type: DM8009
+        master_id: 0x11
+      - id: 0x002
+        type: DM8009
+        master_id: 0x12
+      - id: 0x003
+        type: DM4340P_48V
+        master_id: 0x13
+      - id: 0x004
+        type: DM4340_48V
+        master_id: 0x14
+      - id: 0x005
+        type: DM4310_48V
+        master_id: 0x15
+      - id: 0x006
+        type: DM4310_48V
+        master_id: 0x16
+      - id: 0x007
+        type: DM4310_48V
+        master_id: 0x17
+      - id: 0x008
+        type: DM4310_48V
+        master_id: 0x18
+
+# 持续控制参数
+control:
+  control_frequency: 500   # Hz
+  print_frequency: 5       # Hz
+  duration: 1.0           # seconds
+  amplitude: 1.0           # rad
+  sine_frequency: 0.1      # Hz
+  kp: 20.0
+  kd: 1.0
+  tau_ff: 0.1

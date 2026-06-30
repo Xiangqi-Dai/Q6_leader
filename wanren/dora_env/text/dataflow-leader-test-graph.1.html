@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="mermaid">
+        flowchart TB
+  leader["**leader**"]
+  leader-tick["**leader-tick**"]
+  monitor[/"**monitor**"\]
+subgraph ___dora___ [dora]
+  subgraph ___timer_timer___ [timer]
+    dora/timer/millis/2[\millis/2/]
+    dora/timer/millis/5[\millis/5/]
+  end
+end
+  leader-tick -- tick as control_tick --> leader
+  dora/timer/millis/5 -- sample_tick --> leader
+  dora/timer/millis/2 -- tick --> leader-tick
+  leader -- position_left --> monitor
+  leader -- position_right --> monitor
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base' });
+    </script>
+</body>
+
+</html>

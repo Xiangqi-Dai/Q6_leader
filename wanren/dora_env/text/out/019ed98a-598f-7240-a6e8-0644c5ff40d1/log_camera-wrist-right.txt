@@ -1,0 +1,2 @@
+Opened camera at index /dev/video11
+ioctl(VIDIOC_QBUF): Bad file descriptor

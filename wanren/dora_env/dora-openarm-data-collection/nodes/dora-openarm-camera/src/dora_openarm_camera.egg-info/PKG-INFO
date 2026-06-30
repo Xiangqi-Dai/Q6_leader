@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: dora-openarm-camera
+Version: 1.0.0
+Summary: dora-rs node that captures RGB from real cameras (RealSense D435i / Orbbec Gemini 335Lg)
+Author: Enactic, Inc.
+License: Apache-2.0
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: dora-rs>=0.3.9
+Requires-Dist: opencv-python
+Requires-Dist: numpy
+
+# dora-openarm-camera
+
+A [dora-rs](https://dora-rs.ai/) node that captures **RGB frames from real cameras**:
+Intel RealSense D435i and Orbbec Gemini 335Lg, over V4L2 (UVC YUYV color stream).
+Only the color stream is used — depth (Z16) / infrared (Y8I) / metadata nodes are skipped.
+
+This replaces `dora-openarm-dummy-camera` (which emits random images) for real data collection.
+
+## Camera identification
+
+The `/dev/videoN` number is volatile and some RealSense units ship without a USB
+serial, so each camera is identified by its **USB port path** (stable as long as the
+camera stays plugged into the same USB port). The node scans `v4l2-ctl` output for the
+color (YUYV) node whose `Bus info` matches `DEVICE_PATH`.
+
+Current mapping on this device:
+
+| Role (dataflow node)   | Camera            | DEVICE_PATH                | Resolution |
+| ---------------------- | ----------------- | -------------------------- | ---------- |
+| `camera-ceiling` (top) | Orbbec 335Lg      | `usb-xhci-hcd.16.auto-1`   | 640x480    |
+| `camera-wrist-left`    | RealSense D435i   | `usb-xhci-hcd.10.auto-1.2` | 1280x720   |
+| `camera-wrist-right`   | RealSense D435i   | `usb-xhci-hcd.10.auto-1.1` | 1280x720   |
+
+## Configuration (env / args)
+
+| Env             | Default   | Meaning                                                              |
+| --------------- | --------- | -------------------------------------------------------------------- |
+| `DEVICE_PATH`   | —         | USB port path used to find the color node (see table above).         |
+| `CAMERA_TYPE`   | realsense | `realsense` or `orbbec`. RealSense applies a fixed WB color temp.    |
+| `IMAGE_WIDTH`   | 1280      | Output image width.                                                  |
+| `IMAGE_HEIGHT`  | 720       | Output image height.                                                 |
+| `ENCODING`      | jpeg      | `jpeg` / `rgb8` / `yuv420` / `png` / `webp` / `bmp`.                 |
+| `JPEG_QUALITY`  | 90        | JPEG quality (0-100).                                                |
+| `WB_KELVIN`     | 5400      | RealSense manual white-balance color temperature (offsets cool tint).|
+| `TARGET_BGR`    | —         | Optional `B,G,R` for per-channel gain alignment (see note).          |
+
+## Color note
+
+RealSense D435i is a depth camera; its UVC color stream auto white-balance runs cool
+(greenish-blue). This node uses auto exposure (consistent with Orbbec) plus a fixed WB
+color temperature to get a natural baseline.
+
+The three cameras run as **independent dora nodes in parallel**, so — unlike the
+standalone `grab_rgb.py` — they cannot share a live Orbbec frame as a white-balance
+reference. If you need the RealSense channels to track a target, set `TARGET_BGR` to a
+fixed `B,G,R` (e.g. the Orbbec baseline ~`108,108,105`); per-channel gain then pulls the
+RealSense means toward that target. This is a static approximation, not a per-frame lock.
+
+## License
+
+Licensed under the Apache License 2.0. See [LICENSE](LICENSE) for details.
+
+Copyright 2026 Enactic, Inc.

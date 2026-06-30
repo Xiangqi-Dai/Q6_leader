@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ device_id }} · 本机监控</title>
+  <link rel="stylesheet" href="/static/main.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>{{ device_id }}</h1>
+      <p class="subtitle">Local Dashboard · 内网自监控</p>
+    </div>
+    <div class="topbar-badges">
+      {% if mock_vita_types %}
+      <div id="mock-global-banner" class="mock-global-banner" role="status">
+        <span class="data-mode-badge">模拟</span>
+        <span>部分体征为模拟采集（{{ mock_vita_types | join('、') }}）</span>
+      </div>
+      {% else %}
+      <div id="mock-global-banner" class="mock-global-banner" role="status" hidden></div>
+      {% endif %}
+      {% if show_mqtt_status %}
+      <div id="mqtt-badge" class="mqtt-badge {{ 'mqtt-ok' if mqtt_connected else 'mqtt-bad' }}">
+        公网 MQTT：{{ '已连接' if mqtt_connected else '断联' }}
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="panel-stack">
+    {% for vita_type in panel_order %}
+    <section id="panel-{{ vita_type }}" class="panel-slot" data-vita-type="{{ vita_type }}">
+      {{ panel_html[vita_type] | safe }}
+    </section>
+    {% endfor %}
+  </main>
+
+  <footer class="footer">
+    <span id="ws-status">WebSocket 连接中…</span>
+  </footer>
+
+  <script>
+    window.__LOCAL_DASHBOARD__ = {
+      wsPath: {{ websocket_path | tojson }},
+      panelOrder: {{ panel_order | tojson }},
+    };
+  </script>
+  <script src="/static/echarts.min.js"></script>
+  <script src="/static/charts.js"></script>
+  <script src="/static/ws_client.js"></script>
+</body>
+</html>

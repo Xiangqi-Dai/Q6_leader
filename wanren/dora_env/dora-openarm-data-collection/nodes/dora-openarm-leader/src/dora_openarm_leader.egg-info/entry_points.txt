@@ -1,0 +1,2 @@
+[console_scripts]
+dora-openarm-leader = dora_openarm_leader.main:main

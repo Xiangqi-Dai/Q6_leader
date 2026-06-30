@@ -1,0 +1,2 @@
+[console_scripts]
+dora-print-positions = dora_print_positions.main:main

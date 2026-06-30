@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: dora-camera-fps
+Version: 0.1.0
+Summary: Probe node: count frames/sec per subscribed camera
+Requires-Python: >=3.10
+Requires-Dist: dora-rs>=0.5.0

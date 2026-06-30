@@ -1,0 +1,2 @@
+Opened camera at index /dev/v4l/by-id/usb-Orbbec_R__Orbbec_Gemini_335Lg_CPBDB53000FB-video-index0
+{"timestamp":"2026-06-18T07:46:48.698860Z","level":"WARN","fields":{"message":"timeout while waiting for drop tokens; closing 1 shared memory regions that might not yet been mapped."},"target":"dora_node_api::node"}

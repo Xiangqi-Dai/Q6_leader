@@ -1,0 +1,2 @@
+[console_scripts]
+dora-openarm-docker-policy-server = dora_openarm_docker_policy_server.main:main

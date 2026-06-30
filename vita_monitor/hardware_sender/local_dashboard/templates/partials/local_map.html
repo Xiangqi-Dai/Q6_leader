@@ -1,0 +1,23 @@
+<article class="panel panel-root" data-panel-kind="local_map">
+  <header class="panel-header">
+    <h2>{{ title }}{% include "partials/_data_mode_badge.html" %}</h2>
+    {% if latest %}
+    <span class="panel-updated">更新 {{ latest.collected_at | fmt_time }}</span>
+    {% else %}
+    <span class="panel-updated muted">等待数据…</span>
+    {% endif %}
+  </header>
+
+  {% if latest %}
+  {% set d = latest.vita_data %}
+  {% set m = d.get('map') or {} %}
+  <div class="metric-grid">
+    <div class="metric span-2"><span class="label">frame</span><span class="value mono">{{ m.get('frame_id', '—') }}</span></div>
+    <div class="metric"><span class="label">点数</span><span class="value">{{ m.get('point_count', m.get('sampled_count', (m.get('points') or []) | length)) }}</span></div>
+    <div class="metric"><span class="label">尺寸</span><span class="value">{{ m.get('width', '—') }} × {{ m.get('height', '—') }}</span></div>
+  </div>
+  <p class="muted small">点云可视化未内嵌；此处仅展示 meta。完整地图请使用云端大屏。</p>
+  {% else %}
+  <p class="empty">暂无地图数据（需启用 local_map 插件或配置 mock 模式）</p>
+  {% endif %}
+</article>

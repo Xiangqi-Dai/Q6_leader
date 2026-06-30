@@ -1,0 +1,18 @@
+# 极简测试节点:订阅角度并打印到终端。仅供 leader 本地测试用。
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dora-print-positions"
+version = "0.1.0"
+description = "Test node that prints arm joint positions to the terminal"
+requires-python = ">=3.10"
+dependencies = ["dora-rs >= 0.5.0", "numpy", "pyarrow"]
+
+[project.scripts]
+dora-print-positions = "dora_print_positions.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

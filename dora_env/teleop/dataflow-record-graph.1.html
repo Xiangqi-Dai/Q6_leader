@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="mermaid">
+        flowchart TB
+  camera-head["**camera-head**"]
+  camera-wrist-left["**camera-wrist-left**"]
+  camera-wrist-right["**camera-wrist-right**"]
+  follower["**follower**"]
+  leader["**leader**"]
+  recorder[/"**recorder**"\]
+  ui["**ui**"]
+subgraph ___dora___ [dora]
+  subgraph ___timer_timer___ [timer]
+    dora/timer/millis/2[\millis/2/]
+    dora/timer/millis/5[\millis/5/]
+    dora/timer/millis/33[\millis/33/]
+    dora/timer/secs/1[\secs/1/]
+  end
+end
+  dora/timer/millis/33 -- tick --> camera-head
+  dora/timer/millis/33 -- tick --> camera-wrist-left
+  dora/timer/millis/33 -- tick --> camera-wrist-right
+  dora/timer/millis/2 -- control_tick --> follower
+  dora/timer/millis/5 -- sample_tick --> follower
+  leader -- position_left as target_left --> follower
+  leader -- position_right as target_right --> follower
+  dora/timer/millis/2 -- control_tick --> leader
+  dora/timer/millis/5 -- sample_tick --> leader
+  leader -- position_left as arm_left_action --> recorder
+  follower -- state_left as arm_left_observation --> recorder
+  leader -- position_right as arm_right_action --> recorder
+  follower -- state_right as arm_right_observation --> recorder
+  camera-head -- image as camera_head --> recorder
+  camera-wrist-left -- image as camera_wrist_left --> recorder
+  camera-wrist-right -- image as camera_wrist_right --> recorder
+  ui -- command --> recorder
+  camera-head -- image as camera_head --> ui
+  camera-wrist-left -- image as camera_wrist_left --> ui
+  camera-wrist-right -- image as camera_wrist_right --> ui
+  dora/timer/secs/1 -- tick --> ui
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base' });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{"timestamp":"2026-06-18T06:44:06.538084Z","level":"INFO","fields":{"message":"","name":"MeterProvider.GlobalSet","message":"Global meter provider is set. Meters can now be created using global::meter() or global::meter_with_scope()."},"target":"opentelemetry"}
+[fps] head=21.1fps | wrist_left=23.1fps
+[fps] head=30.0fps | wrist_left=29.0fps
+[fps] head=30.0fps | wrist_left=30.0fps
+[fps] head=30.0fps | wrist_left=30.0fps
+[fps] head=29.0fps | wrist_left=30.0fps
+[fps] head=31.0fps | wrist_left=30.0fps
+[fps] head=29.5fps | wrist_left=30.5fps
+[fps] head=30.0fps | wrist_left=30.0fps
+[fps] head=30.0fps | wrist_left=30.0fps
+[fps] head=30.0fps | wrist_left=29.5fps
+[fps] head=30.0fps | wrist_left=28.0fps

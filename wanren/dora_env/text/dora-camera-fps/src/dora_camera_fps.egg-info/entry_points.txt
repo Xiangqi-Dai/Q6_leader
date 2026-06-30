@@ -1,0 +1,2 @@
+[console_scripts]
+dora-camera-fps = dora_camera_fps.main:main

@@ -1,0 +1,1 @@
+/ros2_ws/openarm_ros2/openarm_bringup/launch/openarm.bimanual.launch.py

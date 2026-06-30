@@ -1,0 +1,2 @@
+[console_scripts]
+dora-openarm-camera = dora_openarm_camera.main:main

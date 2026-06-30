@@ -1,0 +1,135 @@
+device:
+  id: Q5_robot      # 实际部署时，替换为机器人名称
+  sudo_password: "developer"       # 机器的 sudo 密码，用于 iw 等需要 root 权限的命令；留空则不使用 sudo
+# Q5 是 lina 机器人
+
+mqtt:
+  host: 101.126.68.169 # 后续修改为 实际使用的 公网ip
+  port: 5004           # 根据broker配置修改
+  use_tls: false
+  username: Q5_robot  # 实际部署时，替换为机器人名称 
+  password: Q5_robot_wanrenai888!  # 实际部署时，在 EMQX(broker)的管理平台进行用户创建
+  keepalive: 60
+  client_id: Q5_robot # 实际部署时，替换为机器人名称
+
+sender:
+  info_pool_maxsize: 1000
+  publish_idle_sleep_sec: 0.2
+  plugins:
+    heartbeat:
+      enabled: true
+      data_mode: real
+      class: plugins.heartbeat.plugin:HeartbeatVitalPlugin
+      interval_sec: 1.0
+      qos: 0
+      kwargs: {}
+    local_map:
+      enabled: true
+      data_mode: real
+      class: plugins.local_map.plugin:LocalMapVitalPlugin
+      interval_sec: 5.0
+      qos: 0
+      kwargs:
+        xos_host: "http://localhost:1888"
+    local_pose:
+      enabled: true
+      data_mode: real
+      class: plugins.local_pose.plugin:LocalPoseVitalPlugin
+      interval_sec: 2.0
+      qos: 0
+      kwargs:
+        xos_url: "http://localhost:1888/robot/navigate/get_navigate_realtime_pose"
+        frame_id: "map"
+        pose_topic: "/get_pose"
+        pose_field_path: ":head_pose:"
+        pose_message_type: "geometry_msgs/msg/PoseStamped"
+    # AIR-MOD-001 七合一空气传感器；需能访问 sensor_url（见 docs/plugins/4. air_sniffer.md）
+    air_sniffer:
+      enabled: true
+      data_mode: real
+      class: plugins.air_sniffer.plugin:AirSnifferVitalPlugin
+      interval_sec: 3.0
+      qos: 0
+      kwargs:
+        sensor_url: "http://192.168.8.89/api/sensor"
+        timeout_sec: 3.0
+    radio_sniffer:
+      enabled: true
+      data_mode: real
+      class: plugins.radio_sniffer.plugin:RadioSnifferVitalPlugin
+      interval_sec: 5.0
+      qos: 0
+      kwargs:
+        interface: ""
+        scan_method: auto
+       # 机器人与周边 IP 设备连通性（见 docs/plugins/5. ip_peer_monitor.md）
+    ip_peer_monitor:
+      enabled: true
+      data_mode: real
+      class: plugins.ip_peer_monitor.plugin:IpPeerMonitorVitalPlugin
+      interval_sec: 5.0
+      qos: 0
+      kwargs:
+        peers:
+          - ip: "192.168.8.1"
+            name: "GL-Net路由器"
+          - ip: "192.168.8.89"
+            name: "AIR-MOD-001空气传感器"
+          - ip: "192.168.8.89"
+            name: "遥操设备"
+        ping_count: 2
+        ping_timeout_sec: 2.0
+        max_peers_per_cycle: 0
+    # 系统计算资源监控：CPU / 内存 / GPU 占用率与温度（见 docs/plugins/6. system_resource.md）
+    system_resource:
+      enabled: true
+      data_mode: real
+      class: plugins.system_resource.plugin:SystemResourceVitalPlugin
+      interval_sec: 5.0
+      qos: 0
+      kwargs:
+        cpu_sample_interval: 0.5   # CPU 百分比采样阻塞时长（秒）
+        cpu_temperature_enabled: true  # 是否采集 CPU 温度
+        gpu_enabled: false          # 是否尝试 GPU 采集；无 GPU 时可置 false
+
+
+local_dashboard:
+  enabled: true
+  host: "0.0.0.0"
+  port: 5174
+  show_mqtt_status: true
+  default_ui_history_limit: 20
+  websocket_path: "/ws/live"
+  panel_order:
+    - heartbeat
+    - ip_peer_monitor
+    - radio_sniffer
+    - system_resource
+    - air_sniffer
+    - local_map
+    - local_pose
+  vitals:
+    heartbeat:
+      push_to_ui: true
+      ui_history_limit: 60
+    ip_peer_monitor:
+      push_to_ui: true
+      ui_history_limit: 60
+    system_resource:
+      push_to_ui: true
+      ui_history_limit: 30
+    radio_sniffer:
+      push_to_ui: true
+      ui_history_limit: 10
+    air_sniffer:
+      push_to_ui: true
+      ui_history_limit: 20
+    local_map:
+      push_to_ui: true
+      ui_history_limit: 0
+    local_pose:
+      push_to_ui: true
+      ui_history_limit: 20
+  auth:
+    enabled: false
+    token: ""

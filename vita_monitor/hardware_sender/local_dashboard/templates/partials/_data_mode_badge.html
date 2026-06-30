@@ -1,0 +1,3 @@
+{% if is_mock_mode or (data_mode is mock_data_mode) or (latest and latest.data_mode is mock_data_mode) %}
+<span class="data-mode-badge" title="当前数据为模拟采集">模拟</span>
+{% endif %}

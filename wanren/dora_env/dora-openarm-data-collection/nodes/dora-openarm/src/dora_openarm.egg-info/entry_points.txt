@@ -1,0 +1,2 @@
+[console_scripts]
+dora-openarm = dora_openarm.main:main

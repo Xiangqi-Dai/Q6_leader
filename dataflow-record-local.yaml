@@ -1,0 +1,123 @@
+# Copyright 2026 Enactic, Inc.
+#
+# 录制数据流:【单机】主从遥操 + 数据采集(双臂 16 电机 + 3 相机,无升降)。
+#   leader(主臂 slot1)零力矩 + 输出 position(action)
+#   follower(从臂 slot2)PD 跟随 + 输出 state(observation)
+#   3 cameras + ui(web 控制)+ recorder —— 全部跑在本机 .56
+#
+# 单机:所有节点部署在 leader(.56)。leader 臂=slot1(can_slot1_ch0/ch1),
+# follower 臂=slot2(can_slot2_ch0/ch1)。启动见 run_record_local.sh。
+#
+# recorder 的 DIRECTORY / NAME 用占位符,由 run_record.sh 运行时替换为
+# 用户指定目录 + 时间戳名,保证每次运行独立目录、绝不覆盖。
+#
+# 相机(本机 .56,v4l2 探测;全部 640x480 30fps,tick=millis/33):
+#   head        Orbbec Gemini 335 (by-id CPBDB53000FB)     MJPG 640x480  @30  (720p 相机限 15fps,降分辨率换 30)
+#   wrist_left  RealSense D435i 261443064325 (by-id)       YUYV 640x480   @30  (只用 RGB color index0)
+#   wrist_right RealSense D435i 261143064023 (by-id)       YUYV 640x480   @30  (color index0=video1, 只用 RGB)
+
+nodes:
+  - id: leader
+    build: pip install -e /ros2_ws/wanren/dora_env/dora-openarm-data-collection/nodes/dora-openarm-leader
+    path: dora-openarm-leader
+    # 主臂=slot1, 双臂。mode=gravity_comp: 低力矩重力补偿(肩J2+肘J4), 纯前馈不回零。
+    # 调增益改 --gravity-gain; 换回零力矩把 --mode 改 zero_torque; 扩关节加 --gravity-joints 1,2,3,4,5,6,7
+    args: "--left-can-interface can_slot1_ch0 --right-can-interface can_slot1_ch1 --mode gravity_comp --gravity-gain 0.3"
+    inputs:
+      control_tick: dora/timer/millis/2     # 500Hz 重力补偿帧(纯前馈 tau=gain*G)
+      sample_tick: dora/timer/millis/5      # 200Hz 读位 + 输出(= action)
+    outputs:
+      - position_left
+      - position_right
+
+  - id: follower
+    build: pip install -e /ros2_ws/wanren/dora_env/dora-openarm-data-collection/nodes/dora-openarm-follower
+    path: dora-openarm-follower
+    args: "--left-can-interface can_slot2_ch0 --right-can-interface can_slot2_ch1"   # 从臂=slot2, 双臂
+    inputs:
+      control_tick: dora/timer/millis/2      # 500Hz 本地 PD
+      target_left: leader/position_left
+      target_right: leader/position_right
+      sample_tick: dora/timer/millis/5       # 200Hz 输出 state(= observation)
+    outputs:
+      - state_left
+      - state_right
+
+  - id: camera-head
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    restart_policy: on-failure
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Orbbec_R__Orbbec_Gemini_335Lg_CPBDB53000FB-video-index0"
+      CAPTURE_FOURCC: "MJPG"          # 640x480 MJPG @30fps(720p 相机限 15fps)
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33       # 30fps
+    outputs:
+      - image
+
+  - id: camera-wrist-left
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    restart_policy: on-failure
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Intel_R__RealSense_TM__Depth_Camera_435i_Intel_R__RealSense_TM__Depth_Camera_435i_261443064325-video-index0"
+      ENCODING: "jpeg"                 # YUYV 采集 RGB color index0 (只用 RGB)
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33       # 30fps
+    outputs:
+      - image
+
+  - id: camera-wrist-right
+    build: pip install opencv-video-capture
+    path: opencv-video-capture
+    restart_policy: on-failure
+    env:
+      CAPTURE_PATH: "/dev/v4l/by-id/usb-Intel_R__RealSense_TM__Depth_Camera_435i_Intel_R__RealSense_TM__Depth_Camera_435i_261143064023-video-index0"  # 261143064023 color index0(=video1), 只用 RGB
+      ENCODING: "jpeg"
+      IMAGE_WIDTH: 640
+      IMAGE_HEIGHT: 480
+      JPEG_QUALITY: 90
+    inputs:
+      tick: dora/timer/millis/33       # 30fps
+    outputs:
+      - image
+
+  - id: ui
+    build: pip install -e /ros2_ws/wanren/dora_env/dora-openarm-data-collection/nodes/dora-openarm-data-collection-ui
+    path: dora-openarm-data-collection-ui
+    env:
+      METADATA_FILE: "/ros2_ws/wanren/dora_env/teleop/metadata-record.yaml"
+      AUTO_OPEN: "false"
+    inputs:
+      tick: dora/timer/secs/1
+      camera_ceiling: camera-head/image   # Orbbec 显示到 UI 的 ceiling 槽(录制仍记 head)
+      camera_wrist_left: camera-wrist-left/image
+      camera_wrist_right: camera-wrist-right/image
+    outputs:
+      - command
+
+  - id: recorder
+    build: pip install -e /ros2_ws/wanren/dora_env/dora-openarm-data-collection/nodes/dora-openarm-dataset-recorder
+    path: dora-openarm-dataset-recorder
+    env:
+      DIRECTORY: "/ros2_ws_dxq/wanren/dora_env/datasets"           # run_record.sh 替换
+      NAME: "data03"                 # run_record.sh 替换为时间戳
+      METADATA_FILE: "/ros2_ws/wanren/dora_env/teleop/metadata-record.yaml"
+      OPERATION_TYPE: "teleop"
+    inputs:
+      command: ui/command
+      arm_left_action: leader/position_left
+      arm_right_action: leader/position_right
+      arm_left_observation: follower/state_left
+      arm_right_observation: follower/state_right
+      camera_head: camera-head/image
+      camera_wrist_left: camera-wrist-left/image
+      camera_wrist_right: camera-wrist-right/image
+    outputs: []

@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: dora-comm-test
+Version: 0.1.0
+Summary: Minimal cross-machine comm test nodes (counter generator + printer sink)
+Requires-Python: >=3.10
+Requires-Dist: dora-rs>=0.5.0
+Requires-Dist: pyarrow

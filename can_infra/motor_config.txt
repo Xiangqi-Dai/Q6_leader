@@ -1,0 +1,18 @@
+interface can_slot1_ch0 can-fd
+motor 1 DM8009 17
+motor 2 DM8009 18
+motor 3 DM4340P_48V 19
+motor 4 DM4340_48V 20
+motor 5 DM4310_48V 21
+motor 6 DM4310_48V 22
+motor 7 DM4310_48V 23
+motor 8 DM4310_48V 24
+interface can_slot1_ch1 can-fd
+motor 1 DM8009 17
+motor 2 DM8009 18
+motor 3 DM4340P_48V 19
+motor 4 DM4340_48V 20
+motor 5 DM4310_48V 21
+motor 6 DM4310_48V 22
+motor 7 DM4310_48V 23
+motor 8 DM4310_48V 24

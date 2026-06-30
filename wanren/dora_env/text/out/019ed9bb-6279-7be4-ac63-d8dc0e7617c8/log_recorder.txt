@@ -1,0 +1,9 @@
+{"timestamp":"2026-06-18T07:56:39.226958Z","level":"INFO","fields":{"message":"","name":"MeterProvider.GlobalSet","message":"Global meter provider is set. Meters can now be created using global::meter() or global::meter_with_scope()."},"target":"opentelemetry"}
+Traceback (most recent call last):
+  File "/usr/local/bin/dora-openarm-dataset-recorder", line 6, in <module>
+    sys.exit(main())
+  File "/ros2_ws/dora_env/dora-openarm-data-collection/nodes/dora-openarm-dataset-recorder/src/dora_openarm_dataset_recorder/main.py", line 322, in main
+    dataset_writer = DatasetWriter(args.directory, args.name, metadata)
+  File "/ros2_ws/dora_env/dora-openarm-data-collection/nodes/dora-openarm-dataset-recorder/src/dora_openarm_dataset_recorder/main.py", line 178, in __init__
+    self._load_existing_episodes()
+AttributeError: 'DatasetWriter' object has no attribute '_load_existing_episodes'

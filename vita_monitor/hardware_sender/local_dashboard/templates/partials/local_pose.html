@@ -1,0 +1,45 @@
+<article class="panel panel-root" data-panel-kind="local_pose">
+  <header class="panel-header">
+    <h2>{{ title }}{% include "partials/_data_mode_badge.html" %}</h2>
+    {% if latest %}
+    <span class="panel-updated">更新 {{ latest.collected_at | fmt_time }}</span>
+    {% else %}
+    <span class="panel-updated muted">等待数据…</span>
+    {% endif %}
+  </header>
+
+  {% if latest %}
+  {% set loc = latest.vita_data.get('location') or {} %}
+  {% set pos = loc.get('position') or {} %}
+  {% set ori = loc.get('orientation') or {} %}
+  <div class="metric-grid">
+    <div class="metric span-2"><span class="label">frame</span><span class="value mono">{{ loc.get('frame_id', '—') }}</span></div>
+    <div class="metric"><span class="label">x</span><span class="value">{{ pos.get('x') | fmt_float(3) }}</span></div>
+    <div class="metric"><span class="label">y</span><span class="value">{{ pos.get('y') | fmt_float(3) }}</span></div>
+    <div class="metric"><span class="label">z</span><span class="value">{{ pos.get('z') | fmt_float(3) }}</span></div>
+    <div class="metric"><span class="label">qw</span><span class="value">{{ ori.get('w') | fmt_float(3) }}</span></div>
+  </div>
+  {% else %}
+  <p class="empty">暂无位姿数据（需启用 local_pose 插件或配置 mock 模式）</p>
+  {% endif %}
+
+  {% if history %}
+  <details class="history">
+    <summary>最近 {{ history|length }} 条</summary>
+    <table>
+      <thead><tr><th>时间</th><th>x</th><th>y</th><th>z</th></tr></thead>
+      <tbody>
+        {% for row in history|reverse %}
+        {% set p = (row.vita_data.get('location') or {}).get('position') or {} %}
+        <tr>
+          <td>{{ row.collected_at | fmt_time }}</td>
+          <td>{{ p.get('x') | fmt_float(2) }}</td>
+          <td>{{ p.get('y') | fmt_float(2) }}</td>
+          <td>{{ p.get('z') | fmt_float(2) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </details>
+  {% endif %}
+</article>

@@ -1,0 +1,127 @@
+<article class="panel panel-root panel-system-resource" data-panel-kind="system_resource">
+  <header class="panel-header">
+    <h2>{{ title }}{% include "partials/_data_mode_badge.html" %}</h2>
+    {% if latest %}
+    <span class="panel-updated">更新 {{ latest.collected_at | fmt_time }}</span>
+    {% else %}
+    <span class="panel-updated muted">等待数据…</span>
+    {% endif %}
+  </header>
+
+  {% if latest %}
+  {% set d = latest.vita_data %}
+  {% set cpu = d.get('cpu', {}) %}
+  {% set mem = d.get('memory', {}) %}
+  {% set gpu = d.get('gpu', {}) %}
+
+  {% if d.get('error') %}
+  <p class="sysres-alert">{{ d.get('error') }}</p>
+  {% endif %}
+
+  {% if cpu.get('temperature_available') or (gpu.get('available') and gpu_devices) %}
+  <div class="sysres-tags">
+    {% if cpu.get('temperature_available') %}
+    <span class="sysres-tag {{ cpu.get('temperature') | sysres_temp }}">CPU 温度 {{ cpu.get('temperature') | fmt_float(0, '—') }}℃</span>
+    {% endif %}
+    {% for dev in gpu_devices %}
+    {% if dev.get('temperature') is not none %}
+    <span class="sysres-tag {{ dev.get('temperature') | sysres_temp }}">
+      {% if gpu_devices|length > 1 %}GPU{{ dev.get('index', 0) }}{% else %}GPU{% endif %}
+      温度 {{ dev.get('temperature') | fmt_float(0, '—') }}℃
+    </span>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="sysres-grid">
+    <div class="sysres-block">
+      <div class="sysres-head">
+        <span class="sysres-label">CPU 占用率</span>
+        <span class="sysres-value {{ cpu.get('percent') | sysres_percent }}">{{ cpu.get('percent') | fmt_float(1, '—') }}%</span>
+      </div>
+      <div class="sysres-bar-track">
+        <div class="sysres-bar-fill {{ cpu.get('percent') | sysres_percent }}" style="width: {{ [[cpu.get('percent', 0), 0] | max, 100] | min }}%;"></div>
+      </div>
+      {% if cpu.get('core_count') %}
+      <p class="sysres-sub">{{ cpu.get('core_count') }} 核{% if cpu.get('per_core') %}: [{% for v in cpu.get('per_core', []) %}{{ v | fmt_float(1) }}{% if not loop.last %}, {% endif %}{% endfor %}]{% endif %}</p>
+      {% endif %}
+    </div>
+
+    <div class="sysres-block">
+      <div class="sysres-head">
+        <span class="sysres-label">内存使用率</span>
+        <span class="sysres-value {{ mem.get('percent') | sysres_percent }}">{{ mem.get('percent') | fmt_float(1, '—') }}%</span>
+      </div>
+      <div class="sysres-bar-track">
+        <div class="sysres-bar-fill {{ mem.get('percent') | sysres_percent }}" style="width: {{ [[mem.get('percent', 0), 0] | max, 100] | min }}%;"></div>
+      </div>
+      <p class="sysres-sub">{{ mem.get('used_mb') | fmt_float(0) }} / {{ mem.get('total_mb') | fmt_float(0) }} MB</p>
+    </div>
+
+    {% if gpu.get('available') and gpu_devices %}
+      {% for dev in gpu_devices %}
+      <div class="sysres-block">
+        <div class="sysres-head">
+          <span class="sysres-label">GPU 占用率</span>
+          <span class="sysres-value {{ dev.get('utilization_percent') | sysres_percent }}">{{ dev.get('utilization_percent') | fmt_float(1, '—') }}%</span>
+        </div>
+        <div class="sysres-bar-track">
+          <div class="sysres-bar-fill {{ dev.get('utilization_percent') | sysres_percent }}" style="width: {{ [[dev.get('utilization_percent', 0), 0] | max, 100] | min }}%;"></div>
+        </div>
+        <p class="sysres-sub">{{ dev.get('name', 'GPU') }} · 温度 {{ dev.get('temperature') | fmt_float(0, '—') }}℃</p>
+      </div>
+
+      <div class="sysres-block">
+        <div class="sysres-head">
+          <span class="sysres-label">GPU 显存</span>
+          <span class="sysres-value {{ dev.get('memory_percent') | sysres_percent }}">{{ dev.get('memory_percent') | fmt_float(1, '—') }}%</span>
+        </div>
+        <div class="sysres-bar-track">
+          <div class="sysres-bar-fill {{ dev.get('memory_percent') | sysres_percent }}" style="width: {{ [[dev.get('memory_percent', 0), 0] | max, 100] | min }}%;"></div>
+        </div>
+        <p class="sysres-sub">{{ dev.get('memory_used_mb') | fmt_float(0) }} / {{ dev.get('memory_total_mb') | fmt_float(0) }} MB</p>
+      </div>
+      {% endfor %}
+    {% else %}
+    <div class="sysres-block sysres-block--muted">
+      <p class="sysres-sub">无 NVIDIA GPU 或未启用 GPU 采集</p>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if history|length > 1 %}
+  <details class="history">
+    <summary>近期 CPU / 内存（{{ history|length }} 条）</summary>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>时间</th><th>CPU%</th><th>内存%</th><th>GPU%</th></tr>
+        </thead>
+        <tbody>
+          {% for row in history|reverse %}
+          {% set hd = row.vita_data %}
+          {% set hc = hd.get('cpu', {}) %}
+          {% set hm = hd.get('memory', {}) %}
+          {% set hg = hd.get('gpu', {}) %}
+          {% set hgd = hg.get('devices', []) %}
+          <tr>
+            <td>{{ row.collected_at | fmt_time }}</td>
+            <td class="{{ hc.get('percent') | sysres_percent }}">{{ hc.get('percent') | fmt_float(1) }}</td>
+            <td class="{{ hm.get('percent') | sysres_percent }}">{{ hm.get('percent') | fmt_float(1) }}</td>
+            <td>
+              {% if hgd and hgd[0] %}
+              {{ hgd[0].get('utilization_percent') | fmt_float(1) }}
+              {% else %}—{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </details>
+  {% endif %}
+  {% else %}
+  <p class="empty">等待 system_resource 数据…</p>
+  {% endif %}
+</article>

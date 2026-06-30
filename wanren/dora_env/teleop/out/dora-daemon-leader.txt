@@ -1,0 +1,12 @@
+{"timestamp":"2026-06-23T08:32:47.641356Z","level":"INFO","fields":{"message":"Using ZID: 33f2f9ea777d92e0a51b5b76ac986bd6"},"target":"zenoh::net::runtime"}
+{"timestamp":"2026-06-23T08:32:47.701390Z","level":"INFO","fields":{"message":"Zenoh can be reached at: tcp/[fe80::8d68:cf27:2602:cabd]:39197"},"target":"zenoh::net::runtime::orchestrator"}
+{"timestamp":"2026-06-23T08:32:47.701478Z","level":"INFO","fields":{"message":"Zenoh can be reached at: tcp/192.168.0.56:39197"},"target":"zenoh::net::runtime::orchestrator"}
+{"timestamp":"2026-06-23T08:32:47.701649Z","level":"INFO","fields":{"message":"zenohd listening scout messages on 224.0.0.224:7446"},"target":"zenoh::net::runtime::orchestrator"}
+{"timestamp":"2026-06-23T08:32:48.210288Z","level":"WARN","fields":{"message":"Could not connect to: 127.0.0.1:23300, with error: failed to connect to dora-coordinator. Retrying in 1s.."},"target":"dora_daemon::coordinator"}
+{"timestamp":"2026-06-23T08:32:49.214455Z","level":"WARN","fields":{"message":"Could not connect to: 127.0.0.1:23300, with error: failed to connect to dora-coordinator. Retrying in 1s.."},"target":"dora_daemon::coordinator"}
+{"timestamp":"2026-06-23T09:34:26.267164Z","level":"INFO","fields":{"message":"Using ZID: 52d4606c3b9c23050ff5bd5ac2a6e54b"},"target":"zenoh::net::runtime"}
+{"timestamp":"2026-06-23T09:34:26.331971Z","level":"INFO","fields":{"message":"Zenoh can be reached at: tcp/[fe80::8d68:cf27:2602:cabd]:42089"},"target":"zenoh::net::runtime::orchestrator"}
+{"timestamp":"2026-06-23T09:34:26.332086Z","level":"INFO","fields":{"message":"Zenoh can be reached at: tcp/192.168.0.56:42089"},"target":"zenoh::net::runtime::orchestrator"}
+{"timestamp":"2026-06-23T09:34:26.332286Z","level":"INFO","fields":{"message":"zenohd listening scout messages on 224.0.0.224:7446"},"target":"zenoh::net::runtime::orchestrator"}
+{"timestamp":"2026-06-23T09:34:26.842566Z","level":"WARN","fields":{"message":"Could not connect to: 127.0.0.1:23300, with error: failed to connect to dora-coordinator. Retrying in 1s.."},"target":"dora_daemon::coordinator"}
+{"timestamp":"2026-06-23T09:34:27.847300Z","level":"WARN","fields":{"message":"Could not connect to: 127.0.0.1:23300, with error: failed to connect to dora-coordinator. Retrying in 1s.."},"target":"dora_daemon::coordinator"}

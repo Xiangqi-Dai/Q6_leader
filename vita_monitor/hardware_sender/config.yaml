@@ -1,0 +1,145 @@
+device:
+  id: Q6_robot_master      # 实际部署时，替换为机器人名称
+  sudo_password: "radxa"     # 机器的 sudo 密码，用于 iw 等需要 root 权限的命令；留空则不使用 sudo
+# Q6 是 OpenArm 机器人
+
+mqtt:
+  host: 101.126.68.169 # 后续修改为 实际使用的 公网ip
+  port: 5004           # 根据broker配置修改
+  use_tls: false
+  username: Q6_robot_master  # 实际部署时，替换为机器人名称 
+  password: Q6_robot_master_wanrenai888!  # 实际部署时，在 EMQX(broker)的管理平台进行用户创建
+  keepalive: 60
+  client_id: Q6_robot_master # 实际部署时，替换为机器人名称
+
+sender:
+  default_data_mode: real
+  info_pool_maxsize: 1000
+  publish_idle_sleep_sec: 0.2
+  plugins:
+    heartbeat:
+      enabled: true
+      data_mode: real
+      class: plugins.heartbeat.plugin:HeartbeatVitalPlugin
+      interval_sec: 2.0   # 采集间隔，采集频率
+      qos: 0
+      kwargs: {}
+    # 需在已 source 的 ROS 2 环境运行（见 docs/plugins/2. local_map.md）
+    local_map:
+      enabled: false
+      data_mode: real
+      class: plugins.local_map.plugin:LocalMapVitalPlugin
+      interval_sec: 10.0    # 采集间隔，采集频率
+      qos: 0
+      kwargs:
+        source: ros          # real 模式：ros=ROS 话题；xos=XOS HTTP
+        map_topic: "/your_map_cloud"
+        map_field_path: ":"
+        map_message_type: "sensor_msgs/msg/PointCloud2"
+    local_pose:
+      enabled: false
+      data_mode: real   # simulated=robot_simulator；mock=内置 mock；real=按 source 采集
+      class: plugins.local_pose.plugin:LocalPoseVitalPlugin
+      interval_sec: 0.5    # 采集间隔，采集频率
+      qos: 0
+      kwargs:
+        source: ros          # real 模式：ros=ROS 话题；xos=XOS HTTP
+        pose_topic: "/your_pose"
+        pose_message_type: "geometry_msgs/msg/PoseStamped"
+        pose_field_path: ":"
+        simulator_url: "http://127.0.0.1:7001"
+        pose_api_path: "/api/pose"
+      mock_config:
+        trajectory: line_pingpong
+        start_x: -3.0
+        start_y: 0.0
+        end_x: 3.0
+        end_y: 0.0
+        speed: 0.5
+        frame_id: map
+        z: 0.0
+
+    # AIR-MOD-001 七合一空气传感器；需能访问 sensor_url（见 docs/plugins/4. air_sniffer.md）
+    air_sniffer:
+      enabled: false
+      data_mode: real
+      class: plugins.air_sniffer.plugin:AirSnifferVitalPlugin
+      interval_sec: 3.0
+      qos: 0
+      kwargs:
+        sensor_url: "http://192.168.8.89/api/sensor"
+        timeout_sec: 3.0
+    # Linux WiFi 嗅探；需无线网卡与 iw 或 nmcli（见 docs/plugins/3. radio_sniffer.md）
+    radio_sniffer:
+      enabled: false
+      data_mode: real
+      class: plugins.radio_sniffer.plugin:RadioSnifferVitalPlugin
+      interval_sec: 15.0
+      qos: 0
+      kwargs:
+        interface: ""       # 留空自动选第一个 wlan 接口
+        scan_method: auto     # auto | iw | nmcli
+    # 机器人与周边 IP 设备连通性（见 docs/plugins/5. ip_peer_monitor.md）
+    ip_peer_monitor:
+      enabled: true
+      data_mode: real
+      class: plugins.ip_peer_monitor.plugin:IpPeerMonitorVitalPlugin
+      interval_sec: 5.0
+      qos: 0
+      kwargs:
+        peers:
+          - ip: "192.168.0.238"
+            name: "OpenArm从属机"
+        ping_count: 2
+        ping_timeout_sec: 2.0
+        max_peers_per_cycle: 0
+    # 系统计算资源监控：CPU / 内存 / GPU 占用率与温度（见 docs/plugins/6. system_resource.md）
+    system_resource:
+      enabled: true
+      data_mode: real
+      class: plugins.system_resource.plugin:SystemResourceVitalPlugin
+      interval_sec: 5.0
+      qos: 0
+      kwargs:
+        cpu_sample_interval: 0.5   # CPU 百分比采样阻塞时长（秒）
+        cpu_temperature_enabled: true  # 是否采集 CPU 温度
+        gpu_enabled: true          # 是否尝试 GPU 采集；无 GPU 时可置 false
+
+local_dashboard:
+  enabled: true
+  host: "0.0.0.0"
+  port: 5174
+  show_mqtt_status: true
+  default_ui_history_limit: 20
+  websocket_path: "/ws/live"
+  panel_order:
+    - heartbeat
+    - ip_peer_monitor
+    - system_resource
+    - radio_sniffer
+    - air_sniffer
+  vitals:
+    heartbeat:
+      push_to_ui: true
+      ui_history_limit: 60
+    ip_peer_monitor:
+      push_to_ui: true
+      ui_history_limit: 60
+    system_resource:
+      push_to_ui: true
+      ui_history_limit: 60
+    radio_sniffer:
+      push_to_ui: true
+      ui_history_limit: 10
+    air_sniffer:
+      push_to_ui: false
+      ui_history_limit: 20
+    local_map:
+      push_to_ui: false
+      ui_history_limit: 0
+    local_pose:
+      push_to_ui: false
+      ui_history_limit: 20
+  auth:
+    enabled: false
+    token: ""

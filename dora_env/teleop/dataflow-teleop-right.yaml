@@ -1,0 +1,72 @@
+# Copyright 2026 Enactic, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# 右臂单臂 leader-follower 遥操数据流 (分布式)。
+#
+#   dataflow-teleop.yaml 的「单臂(右)」精简版:去掉左臂,只保留右臂。
+#   leader / follower 两个节点本身已支持 `--only right`(左臂不上电时用它),
+#   这里直接在 args 里固定 --only right,并只接右臂的 position → target 连线。
+#
+#   leader   (主臂机)  → 零力矩 + 读右臂关节角
+#   follower (从臂机)  → MIT PD 跟随主臂的右臂关节角 (1:1)
+#
+# 两机各管自己的右臂(一条 CAN 口),跨机传输由 dora over Zenoh 完成。
+# 现场接口:右臂 = can_slot1_ch1(与 launch 的 right_can_interface、双臂数据流一致)。
+#
+# 运行(沿用 run_cluster.sh 的双机拓扑,把 dataflow 文件换成这个):
+#   DATAFLOW=dataflow-teleop-right.yaml FLOW_NAME=teleop-right ./run_cluster.sh
+#   # 或手动:
+#   dora build dataflow-teleop-right.yaml
+#   dora start dataflow-teleop-right.yaml --name teleop-right --attach
+# 停止:
+#   dora stop teleop-right
+
+nodes:
+  - id: leader-tick
+    # 既有 quitter 节点:周期性发控制 tick,收到 "quit" 即停整个 dataflow;Ctrl-C 也能停。
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-quitter
+    path: dora-openarm-quitter
+    inputs:
+      tick: dora/timer/millis/2   # 500 Hz control tick
+    outputs:
+      - tick
+
+  - id: leader
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-leader
+    path: dora-openarm-leader
+    # 只使能右臂(--only right);如本机右臂 CAN 口名不同,改 --right-can-interface。
+    args: "--only right --right-can-interface can_slot1_ch1"
+    _unstable_deploy:
+      machine: leader
+    inputs:
+      control_tick: leader-tick/tick          # 500 Hz: 维持零力矩(达妙需持续帧)
+      sample_tick: dora/timer/millis/5        # 200 Hz: 读位 + 输出右臂关节角
+    outputs:
+      - position_right                        # --only right → 只输出右臂
+
+  - id: follower
+    build: pip install -e ../dora-openarm-data-collection/nodes/dora-openarm-follower
+    path: dora-openarm-follower
+    # 只使能右臂(--only right);如从臂机右臂 CAN 口名不同,改 --right-can-interface。
+    args: "--only right --right-can-interface can_slot1_ch1"
+    _unstable_deploy:
+      machine: follower
+      # 注意:dora 0.5.0 没有 `distribute` 字段。从臂机必须已 pip 装好本节点包
+      # (见 teleop/README.md「Setup」第 2 步 / deploy_follower.sh)。
+    inputs:
+      control_tick: dora/timer/millis/2        # 500 Hz: 本地 PD 跟随环
+      target_right: leader/position_right      # ~200 Hz 右臂目标角
+    outputs: []
+    # 如需录制从臂状态,把上一行换成 `outputs: [state_right]`,
+    # 并加 `sample_tick: dora/timer/millis/5`(follower 在 sample_tick 上输出 state_right)。

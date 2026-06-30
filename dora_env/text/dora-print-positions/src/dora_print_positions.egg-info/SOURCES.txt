@@ -1,0 +1,9 @@
+pyproject.toml
+src/dora_print_positions/__init__.py
+src/dora_print_positions/main.py
+src/dora_print_positions.egg-info/PKG-INFO
+src/dora_print_positions.egg-info/SOURCES.txt
+src/dora_print_positions.egg-info/dependency_links.txt
+src/dora_print_positions.egg-info/entry_points.txt
+src/dora_print_positions.egg-info/requires.txt
+src/dora_print_positions.egg-info/top_level.txt

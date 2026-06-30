@@ -1,0 +1,33 @@
+episodes:
+- id: '1'
+  success: true
+  task_index: 0
+equipment:
+  embodiments:
+    arms:
+      id: OpenArm
+      version: '2.0'
+  id: OpenArmBimanual
+  perceptions:
+    cameras:
+      head: {}
+      wrist_left: {}
+      wrist_right: {}
+  version: '1.0'
+frequencies:
+  action:
+    arms: {}
+  cameras:
+    head: 30.303030303030305
+    wrist_left: 30.303030303030305
+    wrist_right: 30.303030303030305
+  obs:
+    arms: {}
+location: Lab
+operation_type: teleop
+operator: Tester
+tasks:
+- description: Operator drags the leader arms; the follower tracks 1:1 while data
+    is recorded.
+  prompt: Bimanual teleoperation demonstration.
+version: 0.3.0
